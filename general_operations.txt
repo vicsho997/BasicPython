@@ -1,0 +1,177 @@
+##Reading from a file
+"""
+To read from a file your program needs to open the file and
+then read the contents of the file. You can read the entire contents 
+of the file at once, or read the file line by line. The with statement 
+makes sure the file is closed properly when
+the program has finished accessing the file
+"""
+ 
+	#Reading an entire file at once
+	filename = ‘siddhartha.txt"
+	with open(filename) as f_obj:
+		contents = f_obj.read()
+	print(contents)
+
+##File Paths
+"""
+When Python runs the open() function, it looks for the file in the 
+same directory where the program that's being excuted is stored.
+You can open a file from a subfolder using a relative path. You 
+can also use an absolute path to open any file on your system.
+"""
+ 
+	#Opening a file from a subfolder
+	f_path = "text_files/alice.txt"
+
+	with open(f_path) as f_obj:
+		lines = f_obj.readlines()
+
+	for line in lines:
+		print(line.rstrip())
+
+##Reading line by line
+"""
+Each line that's read from the file has a newline character at the
+end of the ling, and the print function adds its own newline
+character. The rstrip() method gets rid of the the extra blank lines
+this would result in when printing to the terminal.
+"""
+	filename = ‘siddhartha.txt'
+
+	with open(filename) as f_obj:
+		for line in f_obj:
+			print(line.rstrip())
+
+##Writing to a file
+"""
+Passing the 'w’ argument to open() tells Python you want to
+write fo the file. Be careful: this will erase the contents of
+the file if it already exists. Passing the ‘a’ argument tells
+Python you want to append to the end of an existing file.
+"""
+	#Writing to an empty file
+	filename = 'programming.txt*
+
+	with open(filename, 'w') as f:
+		f.write("I love programming!")
+
+	#Writing multiple lines to an empty file
+	filename = 'programming.txt*
+
+	with open(filename, 'w') as #:
+		f.write("I love programming! \n")
+		f.write("I love creating new games.\n")
+
+	#Appending to a file
+	filename = 'programming.txt*
+
+	with open(filename, 'a') as f:
+		f.write("I also love working with data.\n")
+		f.write("I love making apps as well.\n")
+
+##Creating and using a class
+"""
+Consider how we might model a car. What information
+would we associate with a car, and what behavior would it have?
+The information is stored in variables called attributes, and the 
+behavior is represented by functions.
+Functions that are part of a class are called methods.
+"""
+	#The Car class
+		class Car():
+			“""A simple attempt to model a car."""
+			def __ init__(self, make, model, year):
+			"""Initialize car attributes."""
+			self.make = make
+			self.model = model
+			self.year = year
+
+			# Fuel capacity and level in gallons.
+			self.fuel_capacity = 15
+			self.fuel_level = 0
+
+		def fill_tank(self):
+			"""Fi11 gas tank to capacity."""
+			self.fuel_level = self.fuel_capacity
+			print("Fuel tank is full.")
+
+		def drive(self):
+			"""Simulate driving."""
+			print("The car is moving.")
+
+	#Creating and using a class (cont.)
+	#Creating an object from a class
+	my_car = Car("audi', "a4", 2016)
+
+	#Accessing attribute values
+	print(my_car.make)
+	print(my_car.model)
+	print(my_car.year)
+
+	#Calling methods
+	my_car.fill_tank()
+	my_car.drive()
+
+	#Creating multiple objects
+	my_car = Car(‘audi', ‘a4", 2016)
+	my_old_car = Car('subaru', ‘outback', 2013)
+	my_truck = Car('toyota', 'tacoma', 2010)
+
+##Modifying attributes
+"""
+You can modify an attribute's value directly, or you can
+write methods that manage updating values more carefully
+"""
+
+	#Modifying an attribute directly
+	my_new_car = Car('audi', 'a4', 2016)
+	my_new_car.fuel_level = 5
+
+	#Writing a method to update an attribute's value
+	def update_fuel_level(self, new_level):
+		"""Update the fuel level."""
+		if new_level <= self.fuel_capacity:
+			self.fuel_level = new_level
+		else:
+			print("The tank can't hold that much!")
+
+	#Writing a method to increment an attribute's value
+
+	def add_fuel(self, amount):
+	"""Add fuel to the tank."""
+	if (self.fuel_level + amount <= self.fuel_capacity):
+		self.fuel_level += amount
+		print("Added fuel.")
+
+	else:
+		print("The tank won't hold that much.")
+
+	#The __init__() method for a child class
+
+	class ElectricCar(Car):
+		"""A simple model of an electric car."""
+
+	def init__(self, make, model, year):
+		"""Tnitialize an electric car."""
+		super().__init__(make, model, year)
+
+		# Attributes specific to electric cars.
+		# Battery capacity in kwh.
+		self.battery_size = 70
+		# Charge level in %.
+		self.charge_level = 9
+
+	#Adding new methods to the child class
+	class ElectricCar(Car):
+		--snip--
+		def charge(self):
+			"""Fully charge the vehicle."""
+			self.charge_level = 100
+			print("The vehicle is fully charged.")
+
+	#Using child methods and parent methods
+	my_ecar = ElectricCar('tesla', ‘model s', 2016)
+
+	my_ecar.charge()
+	my_ecar.drive()
