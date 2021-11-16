@@ -1,0 +1,11 @@
+def reverse number(num: int) -> int:
+
+"""Reverse a given number The given argument num has to be a positive int."""
+# Quiz: How to make this work for negative ints?
+
+reversed = 0
+	while num != 0:
+	reversed = reversed * 10 + num % 10
+	num //= 10
+	
+	return reversed
